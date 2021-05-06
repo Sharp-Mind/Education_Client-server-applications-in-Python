@@ -1,0 +1,1 @@
+Training Repository for the course "Client-server applications on Python".
