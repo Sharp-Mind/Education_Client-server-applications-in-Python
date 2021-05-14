@@ -1,4 +1,4 @@
-'''
+"""
 1.
 
 a:
@@ -22,13 +22,12 @@ b.
 Создать функцию write_to_csv(), в которую передавать ссылку на CSV-файл. 
 В этой функции реализовать получение данных через вызов функции get_data(), 
 а также сохранение подготовленных данных в соответствующий CSV-файл;
-'''
+"""
 import csv
 
 
-main_data = [['Изготовитель системы',
-              'Название ОС', 'Код продукта', 'Тип системы']]
-files = ('info_1.txt', 'info_2.txt', 'info_3.txt')
+main_data = [["Изготовитель системы", "Название ОС", "Код продукта", "Тип системы"]]
+files = ("info_1.txt", "info_2.txt", "info_3.txt")
 
 
 def get_data():
@@ -40,20 +39,20 @@ def get_data():
 
     for i in range(len(files)):
         c = 4
-        with open(files[i], encoding='cp1251') as f:
+        with open(files[i], encoding="cp1251") as f:
             while c > 0:
                 line = f.readline()
-                parted_line = (line.split(':')[1].lstrip().rstrip('\n'))
-                if line.find('Изготовитель системы') != -1:
+                parted_line = line.split(":")[1].lstrip().rstrip("\n")
+                if line.find("Изготовитель системы") != -1:
                     os_prod_list.append(parted_line)
                     c -= 1
-                if line.find('Название ОС') != -1:
+                if line.find("Название ОС") != -1:
                     os_name_list.append(parted_line)
                     c -= 1
-                if line.find('Код продукта') != -1:
+                if line.find("Код продукта") != -1:
                     os_code_list.append(parted_line)
                     c -= 1
-                if line.find('Тип системы') != -1:
+                if line.find("Тип системы") != -1:
                     os_type_list.append(parted_line)
                     c -= 1
 
@@ -67,13 +66,13 @@ def get_data():
 
 
 def write_to_csv(file_to_write):
-    with open(file_to_write, 'w') as f:
+    with open(file_to_write, "w") as f:
         f_writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
         for row in get_data():
             f_writer.writerow(row)
 
 
-write_to_csv('main_data.csv')
+write_to_csv("main_data.csv")
 
-with open('main_data.csv') as f:
+with open("main_data.csv") as f:
     print(f.read())
