@@ -1,5 +1,8 @@
 from socket import *
-import json
+import pickle
+
+
+pickle.DEFAULT_PROTOCOL
 
 known_users = {'Bobik_Rubika': 'TheblastFormThepast'}
 auth_users = []
@@ -25,41 +28,57 @@ msg_answer = {'authenticate': codes['200'],
 
 action_cases = ('presence', 'quit')
 
-s = socket(AF_INET, SOCK_STREAM)
-s.bind(('', 8008))
-s.listen(5)
 
-client, addr = s.accept()
+def recieve_msg(client, addr):
+    data = pickle.loads(client.recv(2000000), fix_imports=True,
+                        encoding='utf-8', errors="strict")
+    print('Сообщение: ', data, ' было отправлено клиентом: ', addr)
+    return(data)
 
 
-msg = ''
-act = ''
-while True:
+def auth_case(data):
+    if data['user']['account_name'] not in list(known_users.keys()):
+        msg = msg_answer['wrong_user_pass']
+    elif data['user']['account_name'] not in auth_users:
+        auth_users.append([str(data['user']['account_name'])])
+        msg = msg_answer['authenticate']
+    elif data['user']['account_name'] in auth_users:
+        msg = msg_answer['already_connected']
+    return msg
 
-    if act == 'quit':
-        client.close()
-        act = ''
-        break
-    elif act != 'quit':
 
-        data = json.loads(client.recv(2000000).decode("utf-8"))
-        print('Сообщение: ', data, ' было отправлено клиентом: ', addr)
+def roll_my_cases(act):
+    for action_case in action_cases:
+        if act == action_case:
+            msg = msg_answer[action_case]
+    return msg
+
+
+def keepitrolling():
+    s = socket(AF_INET, SOCK_STREAM)
+    s.bind(('', 8008))
+    s.listen(5)
+
+    client, addr = s.accept()
+
+    msg = ''
+    act = ''
+
+    while act != 'quit':
+        data = recieve_msg(client, addr)
         act = data['action']
-
         if act == 'authenticate':
-
-            if data['user']['account_name'] not in list(known_users.keys()):
-                msg = msg_answer['wrong_user_pass']
-            elif data['user']['account_name'] not in auth_users:
-                auth_users.append([str(data['user']['account_name'])])
-                msg = msg_answer['authenticate']
-            elif data['user']['account_name'] in auth_users:
-                msg = msg_answer['already_connected']
+            msg = auth_case(data)
         else:
+            msg = roll_my_cases(act)
 
-            for action_case in action_cases:
-                if act == action_case:
-                    msg = msg_answer[action_case]
+        client.send(pickle.dumps(msg, protocol=None,
+                                 fix_imports=True, buffer_callback=None))
 
-        client.send(json.dumps(msg).encode('utf-8'))
         print(f'Отправлено сообщение: {msg}')
+
+    client.close()
+
+
+if __name__ == "__main__":
+    keepitrolling()

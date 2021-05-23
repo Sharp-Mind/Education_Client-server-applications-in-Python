@@ -1,50 +1,70 @@
 from socket import *
 from sys import argv
-import json
+import pickle
 import time
 
 
+pickle.DEFAULT_PROTOCOL
 addr, port = argv[1], argv[2]
 
-action_tosend = {
-    "authenticate": {"action": "authenticate", "time": f"{str(int(time.time()))}", "user": {"account_name": "Bobik_Rubika", "password": "TheblastFormThepast"}},
-    "presence": {"action": "presence", "time": str(int(time.time())), "type": "status", "user": {"account_name": "Bobik_Rubika", "password": "TheblastFormThepast"}},
-    "quit": {"action": "quit"}
-}
+action_tosend = [
+    {"action": "authenticate", "time": str(int(time.time())), "user": {
+        "account_name": "Bobik_Rubika", "password": "TheblastFormThepast"}},
+    {"action": "presence", "time": str(int(time.time())), "type": "status", "user": {
+        "account_name": "Bobik_Rubika", "password": "TheblastFormThepast"}},
+    {"action": "quit"}
+]
 
 action_on_response = {
-    "authenticate_200": action_tosend["presence"],
-    "authenticate_409": action_tosend["presence"],
-    "authenticate_402": action_tosend["quit"],
-    "presence_200": action_tosend["quit"],
+    "authenticate_200": action_tosend[1],
+    "authenticate_409": action_tosend[1],
+    "authenticate_402": action_tosend[2],
+    "presence_200": action_tosend[2],
 }
 
-case = list(action_tosend.keys())[0]
-msg = action_tosend[case]
 
-authed = False
-
-
-s = socket(AF_INET, SOCK_STREAM)
-
-s.connect((addr, int(port)))
+def set_case(act):
+    global case
+    case = act
 
 
-s.send(json.dumps(msg).encode('utf-8'))
-while True:
+def connect():
+    # s = socket(AF_INET, SOCK_STREAM)
+    s.connect((addr, int(port)))
+    s.connect(('localhost', 8008))
+    s.send(pickle.dumps(
+        action_tosend[0], protocol=None, fix_imports=True, buffer_callback=None))
+    return s
 
-    if case != 'quit':
-        data = json.loads(s.recv(1000000).decode('utf-8'))
-    else:
-        s.close()
-        break
+
+def msg_recieve():
+    data = pickle.loads(s.recv(2000000), fix_imports=True,
+                        encoding="utf-8", errors="strict", buffers=None)
 
     print('Сообщение от сервера: ', data,
           ', длиной ', len(data), ' байт')
 
+    return data
+
+
+def answer_choise(data):
     for action in list(action_on_response.keys()):
         if action.find(case) != -1 and action.find(data['response']) != -1:
             msg = action_on_response[f'{case}_{data["response"]}']
-            case = msg['action']            
-            s.send(json.dumps(msg).encode('utf-8'))
+            set_case(msg['action'])
+            s.send(pickle.dumps(msg, protocol=None,
+                                fix_imports=True, buffer_callback=None))
             print(f'Сообщение {msg} отправлено на сервер.')
+
+
+def keepitrolling():
+    while case != 'quit':
+        data = msg_recieve()
+        answer_choise(data)
+    s.close()
+
+
+if __name__ == "__main__":
+    case = action_tosend[0]['action']
+    s = connect()
+    keepitrolling()
