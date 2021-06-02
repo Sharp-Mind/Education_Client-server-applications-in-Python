@@ -14,15 +14,19 @@ codes = {'200': {"response": '200',
                  },
          '402': {
     "response": '402',
-    "error": "This could be 'wrong password' or 'no account with that name'"
-}
+                "error": "This could be 'wrong password' or 'no account with that name'"
+},
+    '404': {
+    "response": '404',
+                "error": "Unknown message"}
 }
 
 msg_answer = {'authenticate': codes['200'],
               'already_connected': codes['409'],
               'presence': codes['200'],
               'wrong_user_pass': codes['402'],
-              'quit': codes['200']
+              'quit': codes['200'],
+              'not_found': codes['404']
               }
 
 
@@ -36,7 +40,7 @@ def recieve_msg(client, addr):
     return(data)
 
 
-def auth_case(data):
+def auth_case(data, msg=codes['404']):
     if data['user']['account_name'] not in list(known_users.keys()):
         msg = msg_answer['wrong_user_pass']
     elif data['user']['account_name'] not in auth_users:
@@ -47,22 +51,19 @@ def auth_case(data):
     return msg
 
 
-def roll_my_cases(act):
+def roll_my_cases(act, msg=codes['404']):
     for action_case in action_cases:
         if act == action_case:
             msg = msg_answer[action_case]
     return msg
 
 
-def keepitrolling():
+def keepitrolling(a=''):
     s = socket(AF_INET, SOCK_STREAM)
     s.bind(('', 8008))
     s.listen(5)
 
     client, addr = s.accept()
-
-    msg = ''
-    act = ''
 
     while act != 'quit':
         data = recieve_msg(client, addr)

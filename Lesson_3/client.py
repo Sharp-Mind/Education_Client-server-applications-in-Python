@@ -29,9 +29,9 @@ def set_case(act):
 
 
 def connect():
-    # s = socket(AF_INET, SOCK_STREAM)
+    s = socket(AF_INET, SOCK_STREAM)
     s.connect((addr, int(port)))
-    s.connect(('localhost', 8008))
+    # s.connect(('localhost', 8008))
     s.send(pickle.dumps(
         action_tosend[0], protocol=None, fix_imports=True, buffer_callback=None))
     return s
@@ -47,20 +47,22 @@ def msg_recieve():
     return data
 
 
-def answer_choise(data):
+def answer_send(msg):
+    s.send(pickle.dumps(msg, protocol=None, fix_imports=True, buffer_callback=None))
+    print(f'Сообщение {msg} отправлено на сервер.')
+
+
+def answer_choise(data, msg=''):
     for action in list(action_on_response.keys()):
         if action.find(case) != -1 and action.find(data['response']) != -1:
             msg = action_on_response[f'{case}_{data["response"]}']
             set_case(msg['action'])
-            s.send(pickle.dumps(msg, protocol=None,
-                                fix_imports=True, buffer_callback=None))
-            print(f'Сообщение {msg} отправлено на сервер.')
+            return msg
 
 
 def keepitrolling():
     while case != 'quit':
-        data = msg_recieve()
-        answer_choise(data)
+        answer_send(answer_choise(msg_recieve()))
     s.close()
 
 
