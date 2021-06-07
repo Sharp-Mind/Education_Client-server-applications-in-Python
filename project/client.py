@@ -7,7 +7,7 @@ from log.client_log import setup as get_logger
 
 
 pickle.DEFAULT_PROTOCOL
-# addr, port = argv[1], argv[2]
+addr, port = argv[1], argv[2]
 
 action_tosend = [
     {"action": "authenticate", "time": str(int(time.time())), "user": {
@@ -36,17 +36,15 @@ def set_case(act):
         global case
         case = act
     except Exception as e:
-        log.setLevel(logging.ERROR)
-        log.error(e)
-        # log.exception(f'Exception: {e}')
+        log.exception(e)
         return
 
 
 def connect():
     try:
         s = socket(AF_INET, SOCK_STREAM)
-        # s.connect((addr, int(port)))
-        s.connect(('localhost', 8008))
+        s.connect((addr, int(port)))
+        # s.connect(('localhost', 8008))
         s.send(pickle.dumps(
             action_tosend[0], protocol=None, fix_imports=True, buffer_callback=None))
         return s
