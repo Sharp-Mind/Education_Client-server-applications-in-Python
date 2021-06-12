@@ -1,0 +1,83 @@
+2021-06-07 23:57:38,971 INFO server Connection opened
+2021-06-07 23:57:38,971 INFO server Connection opened
+2021-06-07 23:57:41,575 INFO server Listens ('127.0.0.1', 44402)
+2021-06-07 23:57:41,575 INFO server Listens ('127.0.0.1', 44402)
+2021-06-07 23:57:41,582 INFO server Incoming message: {'action': 'authenticate', 'time': '1623099461', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} 
+2021-06-07 23:57:41,582 INFO server Incoming message: {'action': 'authenticate', 'time': '1623099461', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} 
+2021-06-07 23:57:41,583 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:57:41,583 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:57:41,583 INFO client Сообщение от сервера: {'response': '200', 'alert': 'OK'} длиной 2 байт
+2021-06-07 23:57:41,583 INFO client Сообщение от сервера: {'response': '200', 'alert': 'OK'} длиной 2 байт
+2021-06-07 23:57:41,585 INFO server Incoming message: {'action': 'presence', 'time': '1623099461', 'type': 'status', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} 
+2021-06-07 23:57:41,585 INFO server Incoming message: {'action': 'presence', 'time': '1623099461', 'type': 'status', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} 
+2021-06-07 23:57:41,585 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:57:41,585 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:57:41,585 INFO client Сообщение {'action': 'presence', 'time': '1623099461', 'type': 'status', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} отправлено на сервер.
+2021-06-07 23:57:41,585 INFO client Сообщение {'action': 'presence', 'time': '1623099461', 'type': 'status', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} отправлено на сервер.
+2021-06-07 23:57:41,585 INFO client Сообщение от сервера: {'response': '200', 'alert': 'OK'} длиной 2 байт
+2021-06-07 23:57:41,585 INFO client Сообщение от сервера: {'response': '200', 'alert': 'OK'} длиной 2 байт
+2021-06-07 23:57:41,586 INFO server Incoming message: {'action': 'quit'} 
+2021-06-07 23:57:41,586 INFO server Incoming message: {'action': 'quit'} 
+2021-06-07 23:57:41,587 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:57:41,587 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:57:41,590 INFO client Сообщение {'action': 'quit'} отправлено на сервер.
+2021-06-07 23:57:41,590 INFO client Сообщение {'action': 'quit'} отправлено на сервер.
+2021-06-07 23:59:10,314 INFO server Сокет создан
+2021-06-07 23:59:10,314 INFO server Сокет создан
+2021-06-07 23:59:13,340 INFO server Соединение установлено с: ('127.0.0.1', 44434)
+2021-06-07 23:59:13,340 INFO server Соединение установлено с: ('127.0.0.1', 44434)
+2021-06-07 23:59:13,346 INFO server Incoming message: {'action': 'authenticate', 'time': '1623099553', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} 
+2021-06-07 23:59:13,346 INFO server Incoming message: {'action': 'authenticate', 'time': '1623099553', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} 
+2021-06-07 23:59:13,349 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:59:13,349 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:59:13,349 INFO client Сообщение от сервера: {'response': '200', 'alert': 'OK'} длиной 2 байт
+2021-06-07 23:59:13,349 INFO client Сообщение от сервера: {'response': '200', 'alert': 'OK'} длиной 2 байт
+2021-06-07 23:59:13,350 INFO client Сообщение {'action': 'presence', 'time': '1623099553', 'type': 'status', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} отправлено на сервер.
+2021-06-07 23:59:13,350 INFO client Сообщение {'action': 'presence', 'time': '1623099553', 'type': 'status', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} отправлено на сервер.
+2021-06-07 23:59:13,355 INFO server Incoming message: {'action': 'presence', 'time': '1623099553', 'type': 'status', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} 
+2021-06-07 23:59:13,355 INFO server Incoming message: {'action': 'presence', 'time': '1623099553', 'type': 'status', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} 
+2021-06-07 23:59:13,356 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:59:13,356 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:59:13,356 INFO client Сообщение от сервера: {'response': '200', 'alert': 'OK'} длиной 2 байт
+2021-06-07 23:59:13,356 INFO client Сообщение от сервера: {'response': '200', 'alert': 'OK'} длиной 2 байт
+2021-06-07 23:59:13,356 INFO client Сообщение {'action': 'quit'} отправлено на сервер.
+2021-06-07 23:59:13,356 INFO client Сообщение {'action': 'quit'} отправлено на сервер.
+2021-06-07 23:59:13,361 INFO server Incoming message: {'action': 'quit'} 
+2021-06-07 23:59:13,361 INFO server Incoming message: {'action': 'quit'} 
+2021-06-07 23:59:13,362 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:59:13,362 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:59:43,491 INFO server Сокет создан
+2021-06-07 23:59:43,491 INFO server Сокет создан
+2021-06-07 23:59:45,939 INFO server Соединение установлено с: ('127.0.0.1', 44450)
+2021-06-07 23:59:45,939 INFO server Соединение установлено с: ('127.0.0.1', 44450)
+2021-06-07 23:59:45,944 INFO server Incoming message: {'action': 'authenticate', 'time': '1623099585', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} 
+2021-06-07 23:59:45,944 INFO server Incoming message: {'action': 'authenticate', 'time': '1623099585', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} 
+2021-06-07 23:59:45,944 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:59:45,944 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:59:45,945 INFO client Сообщение от сервера: {'response': '200', 'alert': 'OK'} длиной 2 байт
+2021-06-07 23:59:45,945 INFO client Сообщение от сервера: {'response': '200', 'alert': 'OK'} длиной 2 байт
+2021-06-07 23:59:45,946 INFO server Incoming message: {'action': 'presence', 'time': '1623099585', 'type': 'status', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} 
+2021-06-07 23:59:45,946 INFO server Incoming message: {'action': 'presence', 'time': '1623099585', 'type': 'status', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} 
+2021-06-07 23:59:45,946 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:59:45,946 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:59:45,947 INFO client Сообщение {'action': 'presence', 'time': '1623099585', 'type': 'status', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} отправлено на сервер.
+2021-06-07 23:59:45,947 INFO client Сообщение {'action': 'presence', 'time': '1623099585', 'type': 'status', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} отправлено на сервер.
+2021-06-07 23:59:45,947 INFO client Сообщение от сервера: {'response': '200', 'alert': 'OK'} длиной 2 байт
+2021-06-07 23:59:45,947 INFO client Сообщение от сервера: {'response': '200', 'alert': 'OK'} длиной 2 байт
+2021-06-07 23:59:45,948 INFO server Incoming message: {'action': 'quit'} 
+2021-06-07 23:59:45,948 INFO server Incoming message: {'action': 'quit'} 
+2021-06-07 23:59:45,949 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:59:45,949 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-07 23:59:45,950 INFO client Сообщение {'action': 'quit'} отправлено на сервер.
+2021-06-07 23:59:45,950 INFO client Сообщение {'action': 'quit'} отправлено на сервер.
+2021-06-10 22:38:48,803 INFO server Сокет открыт
+2021-06-10 22:39:30,945 INFO server Соединение установлено с: ('127.0.0.1', 35090)
+2021-06-10 22:39:30,951 INFO server Log: recieve_msg
+2021-06-10 22:39:30,951 INFO server Incoming message: {'action': 'authenticate', 'time': '1623353970', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} 
+2021-06-10 22:39:30,951 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-10 22:39:30,957 INFO server Log: recieve_msg
+2021-06-10 22:39:30,957 INFO server Incoming message: {'action': 'presence', 'time': '1623353970', 'type': 'status', 'user': {'account_name': 'Bobik_Rubika', 'password': 'TheblastFormThepast'}} 
+2021-06-10 22:39:30,958 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
+2021-06-10 22:39:30,961 INFO server Log: recieve_msg
+2021-06-10 22:39:30,961 INFO server Incoming message: {'action': 'quit'} 
+2021-06-10 22:39:30,962 INFO server Отправлено сообщение: {'response': '200', 'alert': 'OK'}
