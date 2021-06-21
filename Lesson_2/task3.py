@@ -1,4 +1,4 @@
-'''
+"""
 3.
 Задание на закрепление знаний по модулю yaml.
 
@@ -12,25 +12,25 @@
 При этом обеспечить стилизацию файла с помощью параметра default_flow_style, а также 
 установить возможность работы с юникодом: allow_unicode = True;
 Реализовать считывание данных из созданного файла и проверить, совпадают ли они с исходными.
-'''
+"""
 import yaml
 
 
 data = {
-    '1, 2': [1, 2],
-    '3': 3,
-    'словарь': {'10€': '10 евро', '20€': '20 евро', '30€': '30 евро'}
+    "1, 2": [1, 2],
+    "3": 3,
+    "словарь": {"10€": "10 евро", "20€": "20 евро", "30€": "30 евро"},
 }
 
-with open('output.yaml', 'w') as f:
+with open("output.yaml", "w") as f:
     yaml.dump(data, f, allow_unicode=True, default_flow_style=False)
 
 
-with open('output.yaml') as f:
+with open("output.yaml") as f:
     yaml_data = yaml.load(f)
     print(yaml_data)
 
 for k, v in yaml_data.items():
-    print(f'{k}, {v}, {type(v)}')
+    print(f"{k}, {v}, {type(v)}")
 
 # данные совпадают
