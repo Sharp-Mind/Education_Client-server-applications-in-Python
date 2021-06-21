@@ -14,13 +14,13 @@ pickle.DEFAULT_PROTOCOL
 DEBUG = True
 
 
-def mockable(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        func.__name__ = func.__name__ + "_mock" if DEBUG else func.__name__        
-        result = func.__name__(*args, **kwargs)
-        return result
-    return wrapper
+# def mockable(func):
+#     @wraps(func)
+#     def wrapper(*args, **kwargs):
+#         func.__name__ = func.__name__ + "_mock" if DEBUG else func.__name__
+#         result = func.__name__(*args, **kwargs)
+#         return result
+#     return wrapper
 
 
 class Log:
@@ -58,6 +58,7 @@ action_tosend = [
         "user": {"account_name": "Bobik_Rubika", "password": "TheblastFormThepast"},
     },
     {"action": "quit"},
+    {'action': 'start_msg'}
 ]
 
 action_on_response = {
@@ -87,7 +88,7 @@ def connect():
     try:
         s = socket(AF_INET, SOCK_STREAM)
         # s.connect((addr, int(port)))
-        s.connect(("localhost", 8008))
+        s.connect(("localhost", 8044))
         s.send(
             pickle.dumps(
                 action_tosend[0], protocol=None, fix_imports=True, buffer_callback=None
@@ -119,17 +120,17 @@ def msg_recieve():
         return
 
 
-def msg_recieve_mock():
-    try:
-        data = {"response": "200", "alert": "OK"}
+# def msg_recieve_mock():
+#     try:
+#         data = {"response": "200", "alert": "OK"}
 
-        log.debug(f"Сообщение от сервера: {data} длиной {len(data)} байт")
+#         log.debug(f"Сообщение от сервера: {data} длиной {len(data)} байт")
 
-        return data
+#         return data
 
-    except Exception as e:
-        log.exception(e)
-        return
+#     except Exception as e:
+#         log.exception(e)
+#         return
 
 
 @Log()
@@ -147,12 +148,19 @@ def answer_send(msg):
 
 
 def answer_choise(data, msg=""):
-    try:
-        for action in list(action_on_response.keys()):
-            if action.find(case) != -1 and action.find(data["response"]) != -1:
-                msg = action_on_response[f'{case}_{data["response"]}']
-                set_case(msg["action"])
-                break
+    try:        
+        if case != 'presence':
+            for action in list(action_on_response.keys()):
+                if action.find(case) != -1 and action.find(data["response"]) != -1:
+                    msg = action_on_response[f'{case}_{data["response"]}']
+                    set_case(msg["action"])
+                    break
+        elif case == 'presence':
+            answer_send(action_tosend[3])
+            set_case('start_msg')
+            messaging()
+            msg = action_tosend[2]
+            set_case('quit')
         return msg
 
     except Exception as e:
@@ -160,30 +168,41 @@ def answer_choise(data, msg=""):
         return
 
 
-def fake_case():
-    for i in range(action_tosend[1], action_tosend[2]):
-        yield i
+# def fake_case():
+#     for i in range(action_tosend[1], action_tosend[2]):
+#         yield i
 
 
-fake_msg = fake_case()
+# fake_msg = fake_case()
 
 
-def answer_choise_mock(data, msg=""):
-    try:
-        set_case(next(fake_msg["action"]))
-        return msg
+# def answer_choise_mock(data, msg=""):
+#     try:
+#         set_case(next(fake_msg["action"]))
+#         return msg
 
-    except Exception as e:
-        log.exception(e)
-        return
+#     except Exception as e:
+#         log.exception(e)
+#         return
+
+def messaging():
+    msg_recieve()
+    set_case('msg')
+    while True:
+        user_input = input('Ваше сообщение: ')            
+        if user_input == 'exit':
+            break
+        send({'action': 'msg', 'account_name': 'Bobik_Rubika', 'message': user_input})
 
 
 @Log()
 def keepitrolling():
     try:
         while case != "quit":
-            answer_send(answer_choise(msg_recieve()))
-        s.close()
+            if case != 'msg':
+                answer_send(answer_choise(msg_recieve()))
+            else:
+                messaging()
     except Exception as e:
         log.exception(e)
         return
