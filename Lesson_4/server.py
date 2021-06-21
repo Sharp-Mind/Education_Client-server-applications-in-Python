@@ -58,7 +58,7 @@ def roll_my_cases(act, msg=codes['404']):
     return msg
 
 
-def keepitrolling(act=''):
+def keepitrolling(a=''):
     s = socket(AF_INET, SOCK_STREAM)
     s.bind(('', 8008))
     s.listen(5)
